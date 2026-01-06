@@ -19,6 +19,9 @@ class UserProfileSerializer(serializers.Serializer):
 class EmailSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+class ChangePasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    new_password = serializers.CharField()
 class VerifyOTPSerializer(serializers.Serializer):
     email = serializers.EmailField()
     otp = serializers.CharField()
@@ -121,7 +124,7 @@ class ChangePasswordView(APIView):
     @swagger_auto_schema(
         operation_description="Change the password of the authenticated user",
         operation_summary="Change Password",
-        request_body=VerifyOTPSerializer,
+        request_body=ChangePasswordSerializer,
         responses={
             status.HTTP_200_OK: openapi.Response("Password changed successfully."),
             status.HTTP_400_BAD_REQUEST: openapi.Response("Invalid input or OTP."),
