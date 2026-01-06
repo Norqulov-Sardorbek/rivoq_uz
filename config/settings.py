@@ -274,5 +274,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rivoquz@gmail.com'
-EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD',default='email_password')
 DEFAULT_FROM_EMAIL = 'Rivoq <rivoquz@gmail.com>'
