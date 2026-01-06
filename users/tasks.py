@@ -10,7 +10,7 @@ def send_otp_email_task(self, email):
     print("✅ CELERY TASK STARTED for:", email)
 
     otp = str(random.randint(100000, 999999))
-    UserOtp.objects.update_or_create(email=email, defaults={"otp_code": otp})
+    UserOtp.objects.create(email=email, otp_code=otp)
 
     subject = "Sizning tasdiqlash kodingiz"
     html_message = render_to_string('core/email.html', {'otp': otp})
