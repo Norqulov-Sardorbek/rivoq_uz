@@ -88,14 +88,12 @@ class LoginView(APIView):
     )
 
     def post(self, request):
-        email = request.data.get('email')
+        serializer = EmailSerializer(data=request.data)
+        if not serializer.is_valid():
+            raise CustomApiException(ErrorCodes.INVALID_INPUT, message="Noto'g'ri ma'lumot kiritildi.")
 
-        if not email:
-            raise CustomApiException(ErrorCodes.INVALID_INPUT, message="Email talab qilinadi.")
 
-        response=login_user({
-            "email": email
-        })
+        response=login_user(serializer.validated_data)
         return Response(response, status=status.HTTP_200_OK)
         
 class UserProfileAPIView(APIView):
