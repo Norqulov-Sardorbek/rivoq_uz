@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('uuid', models.UUIDField(default=uuid.uuid4, editable=False)),
                 ('is_active', models.BooleanField(default=True)),
                 ('email', models.EmailField(max_length=254)),
-                ('otp_code', models.CharField(max_length=6)),
+                ('otp_code', models.CharField(max_length=5)),
                 ('is_verified', models.BooleanField(default=False)),
             ],
             options={
