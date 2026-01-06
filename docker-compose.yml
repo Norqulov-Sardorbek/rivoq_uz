@@ -4,7 +4,10 @@ services:
   web:
     build: .
     container_name: rivoq_web
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn config.wsgi:application \
+      --bind 0.0.0.0:8000 \
+      --workers 3 \
+      --log-level debug
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
