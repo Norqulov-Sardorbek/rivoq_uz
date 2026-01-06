@@ -29,7 +29,7 @@ class CustomUser(SafeBaseModel):
 
 class UserOtp(SafeBaseModel):
     email = models.EmailField()
-    otp_code = models.CharField(max_length=5)
+    otp_code = models.CharField(max_length=6)
     is_verified = models.BooleanField(default=False)
 
     def __str__(self):
