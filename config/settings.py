@@ -87,6 +87,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '50/hour',
+        'user': '1000/hour',
+    }
 }
 
 SOCIALACCOUNT_PROVIDERS = {
