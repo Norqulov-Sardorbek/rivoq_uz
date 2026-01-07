@@ -38,6 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('courses/', include('courses.urls')),
+    path('accounts/', include('allauth.urls')),
     # Third-party documentation URLs
     path('swaggercha<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swaggercha/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

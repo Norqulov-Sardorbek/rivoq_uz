@@ -102,7 +102,6 @@ SOCIALACCOUNT_PROVIDERS = {
         "SCOPE": [
             "profile",
             "email",
-            "fullname",
         ],
         "AUTH_PARAMS": {
             "access_type": "online",
