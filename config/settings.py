@@ -55,6 +55,11 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     "django_celery_results",
     'celery',
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.github",
     
 ]
 
@@ -68,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -82,6 +88,33 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
 }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP':{
+            'client_id':config('GOOGLE_CLIENT_ID','YOUR_GOOGLE_CLIENT_ID'),
+            'secret':config('GOOGLE_CLIENT_SECRET','YOUR_GOOGLE_CLIENT_SECRET'),
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+            "fullname",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+        "METHOD": "oauth2",
+        "VERIFIED_EMAIL": True,
+        
+    },
+    'github': {
+       'APP':{
+            'client_id':config('GITHUB_CLIENT_ID','YOUR_GOOGLE_CLIENT_ID'),
+            'secret':config('GITHUB_CLIENT_SECRET','YOUR_GOOGLE_CLIENT_SECRET'),
+        },
+    }
+}
+
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey","name": "Authorization","in": "header"}},
     "USE_HTTPS": True, 
