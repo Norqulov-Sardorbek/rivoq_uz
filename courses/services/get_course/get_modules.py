@@ -36,6 +36,6 @@ def get_course_modules(course_id):
         "course_title": course.title,
         "module_count": course.modules.count(),
         "lesson_count": course.lessons_count,
-        "lesson_duration": course.total_duration,
+        "course_duration": course.total_duration,
         "modules": modules_data,
     }

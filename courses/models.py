@@ -39,6 +39,7 @@ class Module(SafeBaseModel):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    order = models.PositiveIntegerField()
     
     @property
     def lessons_count(self):
