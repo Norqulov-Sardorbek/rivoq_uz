@@ -17,7 +17,6 @@ def sync_social_user_to_customuser(sender, request, user, **kwargs):
     if not email:
         return
 
-    # Social account (google yoki github)
     social = user.socialaccount_set.first()
     if not social:
         return
@@ -36,24 +35,29 @@ def sync_social_user_to_customuser(sender, request, user, **kwargs):
         first_name = parts[0] if parts else ""
         last_name = parts[1] if len(parts) > 1 else ""
         avatar_url = data.get("avatar_url")
+        bio = data.get("bio", "")
+        github_link = data.get("url", "")
+        
 
     else:
         return
 
-    custom_user, created = CustomUser.objects.get_or_create(
-        email=email,
-        defaults={
-            "first_name": first_name,
-            "last_name": last_name,
-            "is_verified": True,
-        }
-    )
-
-    if not created:
-        custom_user.first_name = first_name or custom_user.first_name
-        custom_user.last_name = last_name or custom_user.last_name
-        custom_user.is_verified = True
-
+    custom_user = CustomUser.objects.filter(email=email).first()
+    if not custom_user:
+        custom_user = CustomUser.objects.create(
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            bio=bio if provider == "github" else "",
+            git_link=github_link if provider == "github" else "",
+            password=CustomUser.objects.make_random_password()
+        )
+    else:
+        custom_user.first_name = first_name
+        custom_user.last_name = last_name
+        if provider == "github":
+            custom_user.bio = bio
+            custom_user.git_link = github_link
     if avatar_url and not custom_user.image:
         try:
             response = requests.get(avatar_url, timeout=5)
