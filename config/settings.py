@@ -312,3 +312,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rivoquz@gmail.com'
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD',default='email_password')
 DEFAULT_FROM_EMAIL = 'Rivoq <rivoquz@gmail.com>'
+
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = 'https://www.rivoq.uz'
