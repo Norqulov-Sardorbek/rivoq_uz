@@ -152,7 +152,27 @@ JAZZMIN_SETTINGS = {
     "use_google_fonts_cdn": True,
 
     "icons": {
-        'users': 'fas fa-users',
+        'users.CustomUser': 'fas fa-users',
+        "users.UserOtp": "fas fa-key",
+        "users.SocialAuthCode": "fas fa-code",
+        "courses.Course": "fas fa-book",
+        "courses.Lesson": "fas fa-chalkboard-teacher",
+        "courses.Module": "fas fa-layer-group",
+        "courses.CourseComment": "fas fa-comments",
+        "courses.WhatWeOffer": "fas fa-gift",
+        "courses.WhoIsThisCourseFor": "fas fa-user-graduate",
+        "courses.Note": "fas fa-sticky-note",
+        "courses.CourseStudent": "fas fa-user-check",
+        "interview.Interview": "fas fa-clipboard-list",
+        "interview.InterviewVideo": "fas fa-video",
+        "theme_tests.Test": "fas fa-file-alt",
+        "theme_tests.Question": "fas fa-question-circle",
+        "theme_tests.UserTestResult": "fas fa-chart-line",
+        "theme_tests.UserAnswer": "fas fa-reply-all",
+        "allauth.socialaccount": "fas fa-users-cog",
+        "allauth.socialaccount.SocialAccount": "fas fa-user-friends",
+        "allauth.socialaccount.SocialApp": "fas fa-user-shield",
+        "allauth.socialaccount.SocialToken": "fas fa-user-lock",
     },
    
     "topmenu_links": [

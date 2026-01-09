@@ -1,4 +1,6 @@
 from drf_yasg import openapi
+from django.shortcuts import redirect
+from users.models import SocialAuthCode
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
@@ -10,8 +12,7 @@ from users.services.otp_user import send_otp_via_email
 from core.exceptions.exception import CustomApiException
 from users.services.get_user_profile import get_user_profile
 from users.services.change_password_user import verify_user, change_password
-
-
+from allauth.socialaccount.models import SocialAccount
 class UserProfileSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     email = serializers.EmailField()
@@ -168,3 +169,25 @@ class VerifyOrSendOtpUserView(APIView):
             "otp": otp
         })
         return Response(response, status=status.HTTP_200_OK)
+    
+    
+    
+class SocialLoginRedirectView(APIView):
+    def get(self, request):
+        user = request.user
+        
+        social = user.socialaccount_set.first()
+        if not social:
+            return redirect("https://rivoq.uz")
+
+        # 🔐 1 martalik code yaratamiz
+        auth_code = SocialAuthCode.create_code(
+            email=user.email,
+            provider=social.provider
+        )
+
+        frontend_url = "https://frontend.app/auth/callback"
+
+        return redirect(
+            f"{frontend_url}?code={auth_code.code}"
+        )

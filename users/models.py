@@ -1,3 +1,6 @@
+import uuid
+from datetime import timedelta
+from django.utils import timezone
 from django.db import models
 from core.models.basemodel import SafeBaseModel
 
@@ -39,3 +42,14 @@ class UserOtp(SafeBaseModel):
         verbose_name = "Foydalanuvchi OTP"
         verbose_name_plural = "Foydalanuvchi OTPlari"
         
+        
+        
+class SocialAuthCode(SafeBaseModel):
+    email = models.EmailField()
+    is_used = models.BooleanField(default=False)
+    expires_at = models.DateTimeField()
+
+    def is_expired(self):
+        return timezone.now() > self.expires_at
+
+    
